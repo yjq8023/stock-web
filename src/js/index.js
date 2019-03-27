@@ -79,6 +79,7 @@ $(function () {
     })
 
 }
+
 function tableHtml(num,data) {//数据显示模板
   let list=''
   data.forEach((val)=>{
