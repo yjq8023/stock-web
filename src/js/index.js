@@ -5,6 +5,7 @@ import '../css/styles.css'
 import api from './common/api.js'
 import axios from './common/axios.js'
 import {th,td} from './common/template.js'
+import {time} from './common/filter.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
 
 $(function () {
@@ -46,7 +47,7 @@ $(function () {
   });
   $('#tab li').on('click',function () {//tab切换
     $(this).addClass('active').siblings('li').removeClass('active');
-    $('#tableBox .table').eq($(this).index()).show().siblings('.table').hide()
+    $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide()
   });
 
 });
@@ -69,6 +70,9 @@ $(function () {
     rows: 10
   })
     .then((data)=>{
+      data.data.forEach((val)=>{
+        val.update_time=time(Number(val.update_time))
+      })
       tableHtml(2,data.data);
     })
 
@@ -90,6 +94,9 @@ function realTime() {//实时数据
   })
     .then((data)=>{
       if(data.length!==realTimeLength){
+        data.data.forEach((val)=>{
+          val.update_time=time(Number(val.update_time))
+        })
         tableHtml(1,data.data);
       }
       setTimeout(()=>{

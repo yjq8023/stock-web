@@ -99,22 +99,19 @@ header .page-header h1{
 header .input-group{
   margin-top: 16px;
 }
-/*main .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{*/
-  /*background-color: #d9534f;*/
-/*}*/
 main .nav{
   margin: 10px 0;
 }
 main .table>tbody>tr>td,main .table>tbody>tr>th,main .table>tfoot>tr>td,main .table>tfoot>tr>th,main .table>thead>tr>td,main .table>thead>tr>th{
   text-align: center;
 }
-main .tableBox{
+main .tableBox .auto{
   overflow: auto;
 }
-main .tableBox .table{
-  min-width: 650px;
+main .tableBox .table {
+  width: 650px;
 }
-#tableBox .table:nth-of-type(2){
+#tableBox .tables:nth-of-type(2){
   display: none;
 }
 .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{
@@ -132,4 +129,7 @@ main .tableBox td.red{
 }
 main .tableBox td.green{
   color: green;
+}
+main .pager li{
+  margin: 0 5px;
 }
