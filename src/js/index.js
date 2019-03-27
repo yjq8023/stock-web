@@ -7,7 +7,6 @@ import axios from './common/axios.js'
 import {th,td} from './common/template.js'
 import {time} from './common/filter.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
-
 $(function () {
   realTime();
   search(page)
@@ -87,7 +86,7 @@ function tableHtml(num,data) {//数据显示模板
 }
 function realTime() {//实时数据
   axios.get(dataApi,{
-    startTime:(new Date()).getTime(),
+    startTime:new Date().setHours(0, 0, 0, 0),
     endTime:(new Date()).getTime(),
     rows: 10,
     page:1,
