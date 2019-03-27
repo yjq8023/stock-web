@@ -10,7 +10,7 @@ let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
 //搜索
 
 
-
+console.log(12222);
 $(function () {
   realTime();
   search(page)
