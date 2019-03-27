@@ -7,10 +7,6 @@ import axios from './common/axios.js'
 import {th,td} from './common/template.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
 
-//搜索
-
-
-console.log(12222);
 $(function () {
   realTime();
   search(page)
@@ -31,7 +27,6 @@ $(function () {
   })
   $('#next').on('click',function () {//下一页
     page++;
-    // $('#search').click()
     search(page);
   })
 
@@ -56,7 +51,7 @@ $(function () {
 
 });
 
- function search(page) {
+ function search(page) { //搜索
   let searchText=$('#code').val();
   let startTime=$('#startTime').val();
   let endTime=$('#endTime').val();
@@ -75,7 +70,6 @@ $(function () {
   })
     .then((data)=>{
       tableHtml(2,data.data);
-
     })
 
 }
@@ -91,6 +85,8 @@ function realTime() {//实时数据
   axios.get(dataApi,{
     startTime:(new Date()).getTime(),
     endTime:(new Date()).getTime(),
+    rows: 10,
+    page:1,
   })
     .then((data)=>{
       if(data.length!==realTimeLength){
