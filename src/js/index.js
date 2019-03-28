@@ -7,9 +7,11 @@ import axios from './common/axios.js'
 import {th,td, historyTd, historyTh} from './common/template.js'
 import {time} from './common/filter.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
+let yesterday=new Date((new Date().getTime()-(24*3600*1000)))//昨天的时间
 $(function () {
   realTime();
   search(page);
+  dateTimePicker('datetimepicker',new Date((new Date().getTime()-(5*24*3600*1000))),yesterday);
   $('#search').on('click', function() { // 点击搜索
     page = 1;
     search(page);
@@ -29,21 +31,6 @@ $(function () {
     page++;
     search(page);
   });
-
-  $('#datetimepicker1').datetimepicker({
-    language: 'zh-CN', // 显示中文
-    format: 'yyyy-mm-dd hh:ii', // 显示格式
-    initialDate: new Date(), // 初始化当前日期
-    autoclose: true, // 选中自动关闭
-    todayBtn: true// 显示今日按钮
-  });
-  $('#datetimepicker2').datetimepicker({
-    language: 'zh-CN', // 显示中文
-    format: 'yyyy-mm-dd hh:ii', // 显示格式
-    initialDate: new Date(), // 初始化当前日期
-    autoclose: true, // 选中自动关闭
-    todayBtn: true// 显示今日按钮
-  });
   $('#tab li').on('click', function() { // tab切换
     $(this).addClass('active').siblings('li').removeClass('active');
     $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide();
@@ -58,7 +45,8 @@ function search(page) { // 搜索
     startTime = (new Date(startTime)).getTime();
   }
   if (endTime) {
-    endTime = (new Date(endTime)).getTime();
+    endTime = (new Date(endTime)).getHours(0,0,0,0);
+    console.log(new Date(endTime));
   }
   axios.get(dataApi, {
     searchText: searchText,
@@ -112,7 +100,6 @@ function realTime() {//实时数据
       }, 300000);
     });
 }
-
 function getStockItemDetail(item) {
   return new Promise((resolve, reject) => {
     axios.get(`http://hq.sinajs.cn/list=sh${item.stock_code}`)
@@ -124,4 +111,17 @@ function getStockItemDetail(item) {
         })
         .catch((err) => {reject(err)})
   })
+}
+//日期插件
+function dateTimePicker(id,startDate,endDate){
+  $(`#${id}`).datetimepicker({
+    language: 'zh-CN', // 显示中文
+    format: 'yyyy-mm-dd', // 显示格式
+    initialDate: startDate, // 初始化当前日期
+    autoclose: true, // 选中自动关闭
+    todayBtn: true,// 显示今日按钮
+    minView: "month",//设置只显示到月份
+    startDate:startDate,
+    endDate:endDate
+  });
 }
