@@ -151,6 +151,9 @@ main .pager li{
 main .selectBox,main .selectBox .btn{
   width: 100%;
 }
+main .selectBox .btn{
+  height: 34px;
+}
 main .selectBox .btn .caret{
   position: absolute;
   right: 8px;

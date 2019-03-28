@@ -50,8 +50,10 @@ function search(page) { // 搜索
   let startTime='';
   let endTime='';
   if (DataTime) {
-    startTime = new Date(DataTime).getTime()-8*3600*1000;
-    endTime = new Date(DataTime).getTime()+16*3600*1000;
+    startTime = new Date(DataTime).setHours(0,0,0,0);
+    endTime = startTime+24*3600*1000;
+    console.log(new Date(startTime),666);
+    console.log(new Date(endTime),666);
   }
   axios.get(dataApi, {
     searchText: searchText,
@@ -68,7 +70,6 @@ function search(page) { // 搜索
         syncArr.push(getStockItemDetail(val))
       })
       Promise.all(syncArr).then(() => {
-        console.log(data.data);
         tableHtml(2,data.data);
       })
     })
@@ -87,7 +88,7 @@ function tableHtml(num,data) {//数据显示模板
 function realTime() {//实时数据
   axios.get(dataApi,{
     startTime:new Date().setHours(0, 0, 0, 0),
-    endTime:(new Date()).getTime(),
+    endTime:new Date().getTime(),
     rows: 15,
     page:1,
   })
@@ -108,6 +109,7 @@ function getStockItemDetail(item) {
   return new Promise((resolve, reject) => {
     axios.get(`http://hq.sinajs.cn/list=sh${item.stock_code}`)
         .then((data)=>{
+          console.log(data,1111);
           var dataArr = data.split(',')
           item.detail = dataArr || []
           item.cumulative_increase = (item.detail[3] / item.formula_time - 1).toString()
