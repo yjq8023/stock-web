@@ -1,21 +1,21 @@
 
-class Axios{
-  constructor(){
+class Axios {
+  constructor() {
 
   }
-  async get(api,option){
+  async get(api, option) {
     return $.ajax({
-      url:api,
-      data:option,
-    })
+      url: api,
+      data: option
+    });
   }
-  async post(api,option){
+  async post(api, option) {
     return $.ajax({
-      url:api,
-      data:option,
-      type:'post',
-    })
+      url: api,
+      data: option,
+      type: 'post'
+    });
   }
 }
-let axios=new Axios();
-export default axios
+let axios = new Axios();
+export default axios;

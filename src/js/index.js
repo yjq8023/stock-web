@@ -9,63 +9,62 @@ import {time} from './common/filter.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
 $(function () {
   realTime();
-  search(page)
-  $('#search').on('click',  function () {//点击搜索
-    page=1;
-    search(page)
+  search(page);
+  $('#search').on('click', function() { // 点击搜索
+    page = 1;
+    search(page);
     $('#table2').show().siblings('#table1').hide();
     $('#tab li').eq(0).removeClass('active').end().eq(1).addClass('active');
-  })
-  $('#pre').on('click',function () {//上一页
-    if(page<1){
-      page=1;
-      return
-    }else if(page>1){
-      page--
+  });
+  $('#pre').on('click', function() { // 上一页
+    if (page < 1) {
+      page = 1;
+      return;
+    } else if (page > 1) {
+      page--;
     }
     search(page);
-  })
-  $('#next').on('click',function () {//下一页
+  });
+  $('#next').on('click', function() { // 下一页
     page++;
     search(page);
-  })
+  });
 
   $('#datetimepicker1').datetimepicker({
-    language: 'zh-CN',//显示中文
-    format: 'yyyy-mm-dd hh:ii',//显示格式
-    initialDate: new Date(),//初始化当前日期
-    autoclose: true,//选中自动关闭
-    todayBtn: true//显示今日按钮
+    language: 'zh-CN', // 显示中文
+    format: 'yyyy-mm-dd hh:ii', // 显示格式
+    initialDate: new Date(), // 初始化当前日期
+    autoclose: true, // 选中自动关闭
+    todayBtn: true// 显示今日按钮
   });
   $('#datetimepicker2').datetimepicker({
-    language: 'zh-CN',//显示中文
-    format: 'yyyy-mm-dd hh:ii',//显示格式
-    initialDate: new Date(),//初始化当前日期
-    autoclose: true,//选中自动关闭
-    todayBtn: true//显示今日按钮
+    language: 'zh-CN', // 显示中文
+    format: 'yyyy-mm-dd hh:ii', // 显示格式
+    initialDate: new Date(), // 初始化当前日期
+    autoclose: true, // 选中自动关闭
+    todayBtn: true// 显示今日按钮
   });
-  $('#tab li').on('click',function () {//tab切换
+  $('#tab li').on('click', function() { // tab切换
     $(this).addClass('active').siblings('li').removeClass('active');
-    $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide()
+    $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide();
   });
-
 });
 
- function search(page) { //搜索
-  let searchText=$('#code').val();
-  let startTime=$('#startTime').val();
-  let endTime=$('#endTime').val();
-  if(startTime){
-    startTime=(new Date(startTime)).getTime()
+function search(page) { // 搜索
+  let searchText = $('#code').val();
+  let startTime = $('#startTime').val();
+  let endTime = $('#endTime').val();
+  if (startTime) {
+    startTime = (new Date(startTime)).getTime();
   }
-  if(endTime){
-    endTime=(new Date(endTime)).getTime()
+  if (endTime) {
+    endTime = (new Date(endTime)).getTime();
   }
-  axios.get(dataApi,{
-    searchText:searchText,
-    startTime:startTime,
-    endTime:endTime,
-    page:page,
+  axios.get(dataApi, {
+    searchText: searchText,
+    startTime: startTime,
+    endTime: endTime,
+    page: page,
     rows: 10
   })
     .then((data)=>{
@@ -108,10 +107,10 @@ function realTime() {//实时数据
         })
         tableHtml(1,data.data);
       }
-      setTimeout(()=>{
-        realTime()
-      },300000)
-    })
+      setTimeout(() => {
+        realTime();
+      }, 300000);
+    });
 }
 
 function getStockItemDetail(item) {
