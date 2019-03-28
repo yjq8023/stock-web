@@ -35,18 +35,23 @@ $(function () {
     $(this).addClass('active').siblings('li').removeClass('active');
     $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide();
   });
+  $('#select').on('click',function () {//下拉框
+    $('#option').stop().slideToggle()
+  });
+  $('#option li').on('click',function () {//选择下拉框内容
+    $('#select .content').html($(this).find('a').html());
+    $(this).parent().slideUp()
+  })
 });
 
 function search(page) { // 搜索
   let searchText = $('#code').val();
-  let startTime = $('#startTime').val();
-  let endTime = $('#endTime').val();
-  if (startTime) {
-    startTime = (new Date(startTime)).getTime();
-  }
-  if (endTime) {
-    endTime = (new Date(endTime)).getHours(0,0,0,0);
-    console.log(new Date(endTime));
+  let DataTime = $('#time').val();
+  let startTime='';
+  let endTime='';
+  if (DataTime) {
+    startTime = new Date(DataTime).getTime()-8*3600*1000;
+    endTime = new Date(DataTime).getTime()+16*3600*1000;
   }
   axios.get(dataApi, {
     searchText: searchText,
@@ -61,7 +66,6 @@ function search(page) { // 搜索
         val.update_time=time(Number(val.update_time))
         val.detail = []
         syncArr.push(getStockItemDetail(val))
-
       })
       Promise.all(syncArr).then(() => {
         console.log(data.data);
@@ -119,7 +123,7 @@ function dateTimePicker(id,startDate,endDate){
     format: 'yyyy-mm-dd', // 显示格式
     initialDate: startDate, // 初始化当前日期
     autoclose: true, // 选中自动关闭
-    todayBtn: true,// 显示今日按钮
+    todayBtn: false,// 显示今日按钮
     minView: "month",//设置只显示到月份
     startDate:startDate,
     endDate:endDate

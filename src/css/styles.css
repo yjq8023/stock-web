@@ -148,3 +148,11 @@ main .tableBox td.green{
 main .pager li{
   margin: 0 5px;
 }
+main .selectBox,main .selectBox .btn{
+  width: 100%;
+}
+main .selectBox .btn .caret{
+  position: absolute;
+  right: 8px;
+  top: 14px ;
+}
