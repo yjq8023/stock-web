@@ -24,7 +24,7 @@ export let td=(val)=>{
 export let historyTh=`<tr>
           <th>股票代码</th>
           <th>股票名称</th>
-          <th>推算时单价</th>
+          <th>选出时单价</th>
           <th>昨日收盘价</th>
           <th>累计涨幅</th>
           <th>更新时间</th>

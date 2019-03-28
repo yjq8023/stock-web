@@ -110,6 +110,7 @@ main .tableBox .auto{
 }
 main .tableBox .table {
   /*width: 650px;*/
+  min-width: 100%;
   white-space: normal;
 }
 

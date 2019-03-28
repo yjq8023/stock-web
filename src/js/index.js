@@ -97,7 +97,7 @@ function realTime() {//实时数据
   axios.get(dataApi,{
     startTime:new Date().setHours(0, 0, 0, 0),
     endTime:(new Date()).getTime(),
-    rows: 100,
+    rows: 15,
     page:1,
   })
     .then((data)=>{
