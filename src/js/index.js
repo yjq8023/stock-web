@@ -4,7 +4,7 @@ import './vendors/bootstrap-datetimepicker.js'
 import '../css/styles.css'
 import api from './common/api.js'
 import axios from './common/axios.js'
-import {th,td} from './common/template.js'
+import {th,td, historyTd, historyTh} from './common/template.js'
 import {time} from './common/filter.js'
 let page=1,realTimeLength=0,dataApi=`${api}stock/list`;
 $(function () {
@@ -69,26 +69,35 @@ $(function () {
     rows: 10
   })
     .then((data)=>{
+      var syncArr = []
       data.data.forEach((val)=>{
         val.update_time=time(Number(val.update_time))
+        val.detail = []
+        syncArr.push(getStockItemDetail(val))
+
       })
-      tableHtml(2,data.data);
+      Promise.all(syncArr).then(() => {
+        console.log(data.data);
+        tableHtml(2,data.data);
+      })
     })
 
 }
 
 function tableHtml(num,data) {//数据显示模板
+  var thFn = num == 1 ? th : historyTh
+  var tdFn = num == 1 ? td : historyTd
   let list=''
   data.forEach((val)=>{
-    list+=td(val)
+    list+=tdFn(val)
   });
-  $(`#table${num}`).html(th+list);
+  $(`#table${num}`).html(thFn+list);
 }
 function realTime() {//实时数据
   axios.get(dataApi,{
     startTime:new Date().setHours(0, 0, 0, 0),
     endTime:(new Date()).getTime(),
-    rows: 10,
+    rows: 100,
     page:1,
   })
     .then((data)=>{
@@ -103,4 +112,17 @@ function realTime() {//实时数据
         realTime()
       },300000)
     })
+}
+
+function getStockItemDetail(item) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://hq.sinajs.cn/list=sh${item.stock_code}`)
+        .then((data)=>{
+          var dataArr = data.split(',')
+          item.detail = dataArr || []
+          item.cumulative_increase = (item.detail[3] / item.formula_time - 1).toString()
+          resolve()
+        })
+        .catch((err) => {reject(err)})
+  })
 }

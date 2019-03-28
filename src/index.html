@@ -15,39 +15,9 @@
         </div>
     </header>
     <main>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input id="startTime" type='text' class="form-control" placeholder="开始日期"/>
-                        <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input type='text' id="endTime" class="form-control" placeholder="结束日期"/>
-                        <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="请输入股票编号" id="code">
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button" id="search"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div>
-            </div>
-        </div>
         <ul class="nav nav-tabs" id="tab">
-            <li role="presentation" class="active"><a href="javascript:;">实时数据</a></li>
-            <li role="presentation"><a href="javascript:;">历史数据</a></li>
+            <li role="presentation" class="active"><a href="javascript:;">实时选股</a></li>
+            <li role="presentation"><a href="javascript:;">历史选股</a></li>
         </ul>
         <div class="tableBox" id="tableBox">
             <div class="tables auto">
@@ -56,6 +26,36 @@
                 </table>
             </div>
             <div class="tables">
+                <div style="margin-bottom: 10px;" class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input id="startTime" type='text' class="form-control" placeholder="开始日期"/>
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' id="endTime" class="form-control" placeholder="结束日期"/>
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="请输入股票编号/名称" id="code">
+                            <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button" id="search"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="auto">
                     <table id="table2" class="table">
 
