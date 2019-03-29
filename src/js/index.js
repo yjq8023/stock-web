@@ -93,11 +93,12 @@ function realTime() {//实时数据
     page:1,
   })
     .then((data)=>{
-      if(data.length!==realTimeLength){
-        $('#sync-time').html(time(new Date().getTime()))
+      if(data.data.length!==realTimeLength){
+        realTimeLength=data.data.length;
+        $('#sync-time').html(time(new Date().getTime()));
         data.data.forEach((val)=>{
           val.update_time=time(Number(val.update_time))
-        })
+        });
         tableHtml(1,data.data);
       }
       setTimeout(() => {
