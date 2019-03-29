@@ -15,8 +15,6 @@ $(function () {
   $('#search').on('click', function() { // 点击搜索
     page = 1;
     search(page);
-    $('#table2').show().siblings('#table1').hide();
-    $('#tab li').eq(0).removeClass('active').end().eq(1).addClass('active');
   });
   $('#pre').on('click', function() { // 上一页
     if (page < 1) {

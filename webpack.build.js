@@ -18,11 +18,12 @@ module.exports = merge(common, {
       cacheGroups: {
         vendors: {
           test: /node_modules/,
-          name:'vendors/vendors.js'
+          name:'vendors'
         },
         commons: {
           name: "commons",
           chunks: "initial",
+          minSize: 0,
           minChunks: 2
         }
       },
