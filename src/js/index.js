@@ -1,7 +1,6 @@
 import '../css/bootstrap.min.css'
 import '../css/bootstrap-datetimepicker.min.css'
 import './vendors/bootstrap-datetimepicker.js'
-import '../css/styles.css'
 import  '../css/base.css'
 import '../css/index.css'
 import {api,xlApi} from './common/api.js'
@@ -53,6 +52,7 @@ $(function () {
 
 function search(page) { // 搜索
   let scenes=$('#select .content').html();
+  console.log(scenes);
   let searchText = $('#code').val();
   let DataTime = $('#time').val();
   let startTime = '';
@@ -60,8 +60,6 @@ function search(page) { // 搜索
   if (DataTime) {
     startTime = new Date(DataTime).setHours(0, 0, 0, 0);
     endTime = startTime + 24 * 3600 * 1000;
-    console.log(new Date(startTime), 666);
-    console.log(new Date(endTime), 666);
   }
   axios.get(dataApi, {
     scenes:scenes,
@@ -121,7 +119,7 @@ function getStockItemDetail(item) {
   var codesh = `sh${item.stock_code}`
   var codesz = `sz${item.stock_code}`
   return new Promise((resolve, reject) => {
-    axios.get(`${xlApi}list=${codesh}`)
+    axios.get(`${api}list=${codesh}`)
         .then((data) => {
           var dataArr = data.split(',')
           if (dataArr && dataArr[2]) {

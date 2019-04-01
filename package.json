@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": " webpack-dev-server  --config webpack.dev.js",
+    "uat": " webpack-dev-server  --config webpack.uat.js",
     "build": " webpack --config webpack.build.js"
   },
   "keywords": [],
