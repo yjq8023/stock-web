@@ -1,7 +1,8 @@
 import '../css/bootstrap.min.css'
 import '../css/bootstrap-datetimepicker.min.css'
 import './vendors/bootstrap-datetimepicker.js'
-import '../css/styles.css'
+import  '../css/base.css'
+import '../css/index.css'
 import {api,xlApi} from './common/api.js'
 import axios from './common/axios.js'
 import {th,td, historyTd, historyTh} from './common/template.js'
@@ -49,6 +50,7 @@ $(function () {
 });
 
 function search(page) { // 搜索
+  let scenes=$('#select .content').html();
   let searchText = $('#code').val();
   let DataTime = $('#time').val();
   let startTime='';
@@ -60,6 +62,7 @@ function search(page) { // 搜索
     console.log(new Date(endTime),666);
   }
   axios.get(dataApi, {
+    scenes:scenes,
     searchText: searchText,
     startTime: startTime,
     endTime: endTime,
@@ -67,10 +70,10 @@ function search(page) { // 搜索
     rows: 10
   })
     .then((data)=>{
-      var syncArr = []
+      var syncArr = [];
       data.data.forEach((val)=>{
-        val.update_time=time(Number(val.update_time))
-        val.detail = []
+        val.update_time=time(Number(val.update_time));
+        val.detail = [];
         syncArr.push(getStockItemDetail(val))
       })
       Promise.all(syncArr).then(() => {
