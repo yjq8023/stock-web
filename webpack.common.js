@@ -66,8 +66,8 @@ for(let k of files){
     chunks:[k,'vendors','commons'],//根据chunks引入js和css文件
     minify:{
       removeComments:true, //是否压缩时 去除注释,
-      // collapseWhitespace: true,
-      // removeAttributeQuotes: true
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
     }
   });
   config.plugins.push(htmlTemplate)

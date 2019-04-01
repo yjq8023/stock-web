@@ -2,7 +2,7 @@ import '../css/bootstrap.min.css'
 import '../css/bootstrap-datetimepicker.min.css'
 import './vendors/bootstrap-datetimepicker.js'
 import '../css/styles.css'
-import api from './common/api.js'
+import {api,xlApi} from './common/api.js'
 import axios from './common/axios.js'
 import {th,td, historyTd, historyTh} from './common/template.js'
 import {time} from './common/filter.js'
@@ -34,11 +34,17 @@ $(function () {
     $('#tableBox .tables').eq($(this).index()).show().siblings('.tables').hide();
   });
   $('#select').on('click',function () {//下拉框
-    $('#option').stop().slideToggle()
+    $('#option').stop().slideToggle();
   });
   $('#option li').on('click',function () {//选择下拉框内容
     $('#select .content').html($(this).find('a').html());
-    $(this).parent().slideUp()
+    $(this).parent().slideUp();
+    page=1;
+    search(page)
+  })
+  $('#time').on('change',function () {//日期变化数据发生变化
+    page=1;
+    search(page)
   })
 });
 
@@ -106,9 +112,8 @@ function realTime() {//实时数据
 }
 function getStockItemDetail(item) {
   return new Promise((resolve, reject) => {
-    axios.get(`http://hq.sinajs.cn/list=sh${item.stock_code}`)
+    axios.get(`${xlApi}list=sh${item.stock_code}`)
         .then((data)=>{
-          console.log(data,1111);
           var dataArr = data.split(',')
           item.detail = dataArr || []
           item.cumulative_increase = (item.detail[3] / item.formula_time - 1).toString()

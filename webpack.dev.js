@@ -9,6 +9,11 @@
           target: "http://www.ymxf.xyz:3000",
           changeOrigin: true,
           pathRewrite: {"^/api" : ""}
+        },
+        "/xl": {
+          target: "http://hq.sinajs.cn",
+          changeOrigin: true,
+          pathRewrite: {"^/xl" : ""}
         }
       }
     },
