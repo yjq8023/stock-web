@@ -52,7 +52,9 @@ $(function () {
 
 function search(page) { // 搜索
   let scenes=$('#select .content').html();
-  console.log(scenes);
+  if (scenes.indexOf('场景选股') > -1) {
+    scenes = ''
+  }
   let searchText = $('#code').val();
   let DataTime = $('#time').val();
   let startTime = '';
