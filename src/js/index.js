@@ -131,7 +131,7 @@ function getStockItemDetail(item) {
             item.cumulative_increase = (item.detail[3] / item.formula_time - 1).toString()
             resolve()
           } else {
-            axios.get(`${xlApi}list=${codesz}`)
+            axios.get(`${api}list=${codesz}`)
                 .then((data) => {
                   var dataArr = data.split(',')
                   item.detail = dataArr || []
