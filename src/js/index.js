@@ -103,8 +103,8 @@ function realTime() {//实时数据
     page: 1,
   })
       .then((data) => {
-        if (data.data.length !== realTimeLength) {
-          realTimeLength = data.data.length;
+        // if (data.data.length !== realTimeLength) {
+        //   realTimeLength = data.data.length;
           $('#sync-time').html(time(new Date().getTime()));
           data.data.forEach((val,index) => {
             val.update_time = time(Number(val.update_time));
@@ -112,7 +112,7 @@ function realTime() {//实时数据
           data.data.sort(function(a,b){
             return b.num1.split('%')[0]-a.num1.split('%')[0]});
           tableHtml(1, data.data);
-        }
+        // }
         setTimeout(() => {
           realTime();
         }, 300000);
