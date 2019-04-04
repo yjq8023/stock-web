@@ -8,7 +8,7 @@ import axios from './common/axios.js'
 import {th, td, historyTd, historyTh} from './common/template.js'
 import {time} from './common/filter.js'
 
-let page = 1, realTimeLength = 0, dataApi = `${api}stock/list`;
+let page = 1, dataApi = `${api}stock/list`;
 let yesterday = new Date((new Date().getTime() - (24 * 3600 * 1000)))//昨天的时间
 $(function () {
   realTime();
@@ -103,8 +103,6 @@ function realTime() {//实时数据
     page: 1,
   })
       .then((data) => {
-        // if (data.data.length !== realTimeLength) {
-        //   realTimeLength = data.data.length;
           $('#sync-time').html(time(new Date().getTime()));
           data.data.forEach((val,index) => {
             val.update_time = time(Number(val.update_time));
@@ -112,13 +110,11 @@ function realTime() {//实时数据
           data.data.sort(function(a,b){
             return b.num1.split('%')[0]-a.num1.split('%')[0]});
           tableHtml(1, data.data);
-        // }
         setTimeout(() => {
           realTime();
         }, 300000);
       });
 }
-
 function getStockItemDetail(item) {
   var codesh = `sh${item.stock_code}`
   var codesz = `sz${item.stock_code}`
