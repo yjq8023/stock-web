@@ -6,7 +6,7 @@
       host: '127.0.0.1',
       proxy: {
         "/api": {
-          target: "http://43.226.33.31:3000",
+          target: "http://43.226.33.31:80",
           changeOrigin: true,
           pathRewrite: {"^/api" : ""}
         },
